@@ -5,7 +5,7 @@ const Manager = require("./lib-classes/manager");
 const Engineer = require("./lib-classes/engineer");
 const Intern = require("./lib-classes/intern");
 const inherits = require("util");
-
+const team = []
 
 // start application functions go here
 function start() {
@@ -56,6 +56,7 @@ function addEmployee() {
     ])
 
         .then(function ({ name, id, email, role }) {
+
             switch (role) {
                 case "Engineer":
                     inquirer.prompt({
@@ -64,7 +65,8 @@ function addEmployee() {
                         name: "github"
                     })
                         .then(function ({ github }) {
-                            new Engineer(name, id, email, github)
+                            const engineer = new Engineer(name, id, email, github)
+                            team.push(engineer);
                             djKhaled();
                         })
                     break;
@@ -75,7 +77,8 @@ function addEmployee() {
                         name: "school"
                     })
                         .then(function ({ school }) {
-                            new Intern(name, id, email, school)
+                            const intern = new Intern(name, id, email, school)
+                            team.push(intern);
                             djKhaled();
                         })
                     break;
@@ -85,7 +88,9 @@ function addEmployee() {
                         message: "What is your Office Number?",
                         name: "officeNumber"
                     }).then(function ({ officeNumber }) {
-                        new Manager(name, id, email, officeNumber)
+                        const manager = new Manager(name, id, email, officeNumber)
+                        team.push(manager);
+                        console.log(generateManager(manager));
                         djKhaled();
                     })
                     break;
@@ -98,9 +103,18 @@ function djKhaled() {
     inquirer.prompt({
         type: 'confirm',
         message: 'Would you like to add another employee?',
-        name: 'Another One',
-    })
+        name: 'anotherOne',
+    }).then(function (anotherOne) {
+        console.log(anotherOne.anotherOne)
+        if (anotherOne.anotherOne) {
+            addEmployee();
+        } else {
+            // console.log(generateHtml(team));
+            
+        }
 
+    }
+    )
 }
 
 
@@ -108,3 +122,106 @@ start();
 
 
 // generate html file to appear in dist-output 
+
+function generateHtml(manager, Engineer, Intern) {
+    return ` 
+    
+    <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <div id="myTeam"
+        style="background:lightcoral; border: 5px solid black; color:white; text-align: center;padding: 20px;">
+        <h1 class="header">My Team</h1>
+    </div>
+
+    <div class="container" style="border: 5px solid black; margin-top: 50px;">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-header" class="manager" style="background: aqua;">
+                        ${Manger.name} <br>
+                        Manager
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item" class="id">ID:</li>
+                        <li class="list-group-item" class="email"> Email:</li>
+                        <li class="list-group-item" class="officeNum">Office number: </li>
+                    </ul>
+                </div>
+            </div>
+
+
+            <div class="col-md-4">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-header" class="engineer" style="background: aqua;">
+                        ${Engineer.name} <br>
+                        Engineer
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item" class="id">ID:</li>
+                        <li class="list-group-item" class="email">Email:</li>
+                        <li class="list-group-item" class="gitHub">GitHub:</li>
+                    </ul>
+                </div>
+            </div>
+
+
+            <div class="col-md-4">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-header" class="intern" style="background: aqua;">
+                        ${Intern.name} <br>
+                        Intern
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item" class="id">ID:</li>
+                        <li class="list-group-item" class="email">Email:</li>
+                        <li class="list-group-item" class="school">University:</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+        crossorigin="anonymous"></script>
+
+
+</body>
+
+</html>
+    
+    
+    `;
+}
+
+function generateManager(manager){
+    return `  <div class="container" style="border: 5px solid black; margin-top: 50px;">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card" style="width: 18rem;">
+                <div class="card-header" class="manager" style="background: aqua;">
+                    ${manager.name} <br>
+                    Manager
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item" class="id">ID:</li>
+                    <li class="list-group-item" class="email"> Email:</li>
+                    <li class="list-group-item" class="officeNum">Office number: </li>
+                </ul>
+            </div>
+        </div> `
+}
