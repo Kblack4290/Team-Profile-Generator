@@ -18,7 +18,6 @@ const team = []
 // start application functions go here
 function start() {
     
-    
     addEmployee()
 }
 
@@ -117,10 +116,6 @@ function writeToFile(){
     })
 }
 
-
-
-
-
 function djKhaled() {
 
     inquirer.prompt({
@@ -137,8 +132,5 @@ function djKhaled() {
 
     })
 }
-
-
-
 
 start();
