@@ -2,7 +2,7 @@ const generateSquad = fullSquad => {
     const createManager = Manager => {
         return `
         <div class="col-md-4">
-            <div class="card" style="width: 18rem;">
+            <div class="card" style="width: 18rem;" class= "rounded shadow">
                 <div class="card-header" class="manager" style="background: aqua;">
                     ${Manager.getName()} <br>
                         Manager
@@ -21,7 +21,7 @@ const generateSquad = fullSquad => {
         return `
     
     <div class="col-md-4">
-        <div class="card" style="width: 18rem;">
+        <div class="card" style="width: 18rem;" class= "rounded shadow">
             <div class="card-header" class="engineer" style="background: aqua;">
             ${Engineer.getName()} <br>
             Engineer
@@ -40,7 +40,7 @@ const generateSquad = fullSquad => {
         return `
         
     <div class="col-md-4">
-        <div class="card" style="width: 18rem;">
+        <div class="card" style="width: 18rem;" class= "rounded shadow">
             <div class="card-header" class="intern" style="background: aqua;">
             ${Intern.getName()} <br>
             Intern

@@ -35,7 +35,7 @@ describe('intern', () => {
         it('can get email via getEmail()', () => {
             const testValue = 'test@gmail.com';
             const intern = new Intern('Nikima', 100, testValue);
-            expect(intern.getEmail()).toBe(testValue.testValue);
+            expect(intern.getEmail()).toBe(testValue);
         });
 
         it('can get shool via getShool()', () => {

@@ -36,13 +36,13 @@ describe('manager', () => {
         it('can get email via getEmail()', () => {
             const testValue = 'test@gmail.com';
             const manager = new Manager('Nikima', 100, testValue);
-            expect(manager.getEmail()).toBe(testValue.testValue);
+            expect(manager.getEmail()).toBe(testValue);
         });
 
         it('can get office number via getOfficeNumber () ', () => {
             const testValue = '369';
             const manager = new Manager('Nikima', 100, 'test@gmail.com', testValue);
-            expect(manager.getEmail()).toBe(testValue.testValue);
+            expect(manager.getOfficeNumber()).toBe(testValue);
         });
 
 

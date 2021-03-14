@@ -41,13 +41,13 @@ function addEmployee() {
         {
             message: 'Submit employee ID.',
             type: 'input',
-            name: 'ID',
+            name: 'id',
             validate: (value) => { if (value) { return true } else { return 'Please submit employee ID.' } },
         },
         {
             message: 'Enter employee Email address.',
             type: 'input',
-            name: 'Email',
+            name: 'email',
             validate: (value) => { if (value) { return true } else { return 'Please enter an employee Email address.' } },
         },
         {

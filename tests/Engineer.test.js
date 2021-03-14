@@ -36,7 +36,7 @@ describe('Engineer', () => {
         it('can get email via getEmail()', () => {
             const testValue = 'test@gmail.com';
             const engineer = new Engineer('Nikima', 100, testValue);
-            expect(engineer.getEmail()).toBe(testValue.testValue);
+            expect(engineer.getEmail()).toBe(testValue);
         });
 
         it('can get github via getGithub()', () => {
