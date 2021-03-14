@@ -5,11 +5,20 @@ const Manager = require("./lib-classes/manager");
 const Engineer = require("./lib-classes/engineer");
 const Intern = require("./lib-classes/intern");
 const inherits = require("util");
+const path = require("path");
+
+const squad = require("./template");
+
+const OUTPUT_DIR = path.resolve(__dirname, "dist-output"); // 
+const outputPath = path.join(OUTPUT_DIR, "squad.html") // to create team.html after prompts answered
+
 const team = []
+
 
 // start application functions go here
 function start() {
-    docHtml()
+    
+    
     addEmployee()
 }
 
@@ -91,12 +100,26 @@ function addEmployee() {
                         const manager = new Manager(name, id, email, officeNumber)
                         team.push(manager);
                         djKhaled();
-                        // console.log(generateManager(manager));
+                        
                     })
                     break;
             }
         })
 };
+
+function writeToFile(){
+    fs.writeFileSync(outputPath, squad(team), (err) => {
+        if(err) {
+            return console.log(err)
+        } else {
+            console.log('Employee added to squad!');
+        }
+    })
+}
+
+
+
+
 
 function djKhaled() {
 
@@ -109,137 +132,12 @@ function djKhaled() {
         if (anotherOne.anotherOne) {
             addEmployee();
         } else {
-            console.log(docHtml(team));
-
+        writeToFile()
         }
 
-    }
-    )
+    })
 }
 
-
-
-
-
-// generate html file to appear in dist-output 
-
-
-
-function docHtml() {
-    const html = ` 
-    
-<!DOCTYPE html>
-    <html lang="en">
-
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-        <title>Document</title>
-
-    </head>
-
-<body>
-    <div id="myTeam"
-        style="background:lightcoral; border: 5px solid black; color:white; text-align: center;padding: 20px;">
-        <h1 class="header">My Team</h1>
-    </div> 
-
-    <div class="container" style="border: 5px solid black; margin-top: 50px;">
-    <div class="row">`;
-
-    fs.writefile("../dist-output/teamProfile.html", html, function (err) {
-        if (err) {
-            console.log(err);
-        }
-    });
-
-}
-
-function generateManager(manager) {
-    return `  
-        <div class="col-md-4">
-            <div class="card" style="width: 18rem;">
-                <div class="card-header" class="manager" style="background: aqua;">
-                    ${manager.name} <br>
-                    Manager
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item" class="id">ID:</li>
-                    <li class="list-group-item" class="email"> Email:</li>
-                    <li class="list-group-item" class="officeNum">Office number: </li>
-                </ul>
-            </div>
-        </div> `
-}
-
-function generateEngineer(engineer) {
-
-return ` 
-
-<div class="col-md-4">
-    <div class="card" style="width: 18rem;">
-        <div class="card-header" class="engineer" style="background: aqua;">
-            ${engineer.name} <br>
-            Engineer
-        </div>
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item" class="id">ID:</li>
-            <li class="list-group-item" class="email">Email:</li>
-            <li class="list-group-item" class="gitHub">GitHub:</li>
-        </ul>
-    </div>
-</div>
-`
-}
-
-function generateIntern(intern) {
-    return `
-<div class="col-md-4">
-    <div class="card" style="width: 18rem;">
-        <div class="card-header" class="intern" style="background: aqua;">
-            ${intern.name} <br>
-            Intern
-        </div>
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item" class="id">ID:</li>
-            <li class="list-group-item" class="email">Email:</li>
-            <li class="list-group-item" class="school">University:</li>
-        </ul>
-    </div>
-</div>`
-}
-
-
-
-
-function generateHtml() {
-    const endDocHtml = `
-</div>
-
-</div>
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
-    crossorigin="anonymous"></script>
-
-
-</body>
-
-</html>
-
-`
-
-    fs.appendFile("../dist-output/teamProfile.html", html, function (err) {
-        if (err) {
-            console.log(err);
-        };
-    });
-    console.log("end");
-}
 
 
 
